@@ -33,6 +33,28 @@ function onDeviceReady() {
         a.click()
         document.body.removeChild(a)
       }
+
+      async function ping(url) {
+        try {
+          // Start time
+          const start = Date.now();
+      
+          // Send a request to the URL
+          await fetch(url, { method: 'HEAD', cache: 'no-cache' });
+      
+          // Calculate the time difference
+          const end = Date.now();
+          const pingTime = end - start;
+      
+          console.log(`Ping to ${url}: ${pingTime} ms`);
+          return pingTime;
+        } catch (error) {
+          console.error(`Failed to ping ${url}:`, error);
+          window.location.href = "internet_req.html";
+        }
+      }
+    
+      ping("google.com")
       console.log("http://localhost:8001/redo_page.js")
     // https://github.com/t1st3/cordova-plugin-ping
     // var p, success, err, ipList;
